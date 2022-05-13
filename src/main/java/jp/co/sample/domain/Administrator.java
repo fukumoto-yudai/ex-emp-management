@@ -4,7 +4,16 @@ package jp.co.sample.domain;
  * テーブル作成
  */
 public class Administrator {
+	
 	private Integer id;
+	private String name;
+	private String mailAddress;
+	private String password;
+	
+	public  void Adinistrater() {
+		
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -37,10 +46,6 @@ public class Administrator {
 		this.password = password;
 	}
 
-	private String name;
-	private String mailAddress;
-	private String password;
-	
 	@Override
 	public String toString() {
 		return "Administrator [id=" + id + ", name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
