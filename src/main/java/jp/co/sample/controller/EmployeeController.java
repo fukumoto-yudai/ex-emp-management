@@ -37,9 +37,16 @@ public class EmployeeController {
 	public String showList(Model model) {
 		List<Employee> employeesList=employeeService.showList();
 		model.addAttribute("employeeList", employeesList);
-		return "employee/list.html";
-		
+		return "employee/list";	
 	}
+	
+	@RequestMapping("/showDetail")
+	public String showDetail(String id,Model model) {
+		Employee employee=employeeService.showDetail(Integer.parseInt(id));
+			model.addAttribute("employee", employee);
+			return "employee/detail";
+	}
+	
 	
 
 }

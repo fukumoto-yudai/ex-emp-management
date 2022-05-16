@@ -20,5 +20,13 @@ public class EmployeeService {
 		List<Employee> employeeList =employeeRepository.findAll();
 		return employeeList;
 	}
+	
+	public Employee showDetail(Integer id) {
+		return employeeRepository.load(id);
+	}
+	
+	public void update(Employee employee) {
+		 employeeRepository.update(employee);
+	}
 
 }
