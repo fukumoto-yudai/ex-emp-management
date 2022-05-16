@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
@@ -18,6 +18,9 @@ import jp.co.sample.service.AdministratorService;
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
+	
+	@Autowired
+	private AdministratorService administratorService;
 	
 	@Autowired
 	private HttpSession session;
@@ -37,11 +40,10 @@ public class AdministratorController {
 		return "administrator/insert";
 	}
 	@RequestMapping("/insert")
-	public String create(InsertAdministratorForm form
-			,RedirectAttributes redirectAttributes) {
+	public String insert(InsertAdministratorForm form) {
 		Administrator administrator=new Administrator();
 		BeanUtils.copyProperties(form, administrator);
-		
+		administratorService.insert(administrator);
 		return "redirect:/";
 	}
 	
@@ -52,14 +54,20 @@ public class AdministratorController {
 	
 	@RequestMapping("/login")
 	public String login(LoginForm form,Model model) {
-		Administrator administrator=administratorService.login(form.getMailAddress(),form.getPassword());
+		Administrator administrator = administratorService.login(form.getMailAddress(),form.getPassword());
+		System.out.println(administrator);
 		
-		if(administrator ==null ) {
-		
-	
+		if(administrator == null ) {
+			model.addAttribute("message", "メールアドレスまたはパスワードが不正です。");
+			return "administrator/login";
+		}else {
+			session.setAttribute("administratorName",administrator.getName());
+			return "forward:/employee/showList";
 		}
 	}
 }
+
+
 		
 		
 	

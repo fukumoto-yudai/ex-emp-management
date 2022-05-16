@@ -1,6 +1,5 @@
 package jp.co.sample.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,8 @@ public class AdministratorService {
 	}
 	
 	public Administrator login(String mailAddress,String password) {
-		return administratorRepository.findByMailAddressAndPassword(mailAddress,password);
+		Administrator administrator=administratorRepository.findByMailAddress(mailAddress, password);
+		return administrator;
 		
 	}
 	

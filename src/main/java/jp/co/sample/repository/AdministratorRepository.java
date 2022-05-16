@@ -7,6 +7,8 @@ package jp.co.sample.repository;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -29,26 +31,28 @@ public class AdministratorRepository {
 		Administrator administrator =new Administrator();
 		administrator.setId(rs.getInt("id"));
 		administrator.setName(rs.getString("name"));
-		administrator.setMailAddress(rs.getString("mailAddress"));
+		administrator.setMailAddress(rs.getString("mail_Address"));
 		administrator.setPassword(rs.getString("password"));
 		return administrator;
 	};
 	
 	public void  insert(Administrator administrator) {
-		SqlParameterSource param=new BeanPropertySqlParameterSource(administrator);
-		String insertsql="insert into administrator(id,name,mailAddress,password)"
-				+ " values(:id,:name:,:mailAddress,:password)";
-		template.update(insertsql, param);
+		SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
+		String sql = "insert into administrators(name,mail_Address,password)"
+				+ " values(:name:,:mailAddress,:password)";
+		template.update(sql, param);
 	}
-	public Administrator findByMailAddressAndPassword(String mailAddress,String password){
-		try {
-			SqlParameterSource param=new MapSqlParameterSource().addValue("mailAddress", mailAddress).addValue("password", password);
-		String sql="select id,name,mailAddress,password from addministrators where mailAdress and password";
-		 return template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
-		}catch(Exception e) {
-			return null;
-		}
+	
+public Administrator findByMailAddress(String mailAddress,String password) {
+	String sql = "select id,name,mail_address,password from administrators where mail_address=:mailAddress";
+	SqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", mailAddress).addValue("password", password);
+	List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
+	if (administratorList.size() == 0) {
+		return null;
 	}
+	return administratorList.get(0);
 }
+}
+
 
 
