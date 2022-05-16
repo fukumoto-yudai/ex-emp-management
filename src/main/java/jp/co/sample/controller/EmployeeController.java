@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,18 @@ public class EmployeeController {
 			model.addAttribute("employee", employee);
 			return "employee/detail";
 	}
+	
+	@RequestMapping("/update")
+	public String update(UpdateEmployeeForm form) {
+		int dependentsCount=Integer.parseInt(form.getId());
+		Employee employee=employeeService.showDetail(dependentsCount);
+		employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
+		employeeService.update(employee);
+		return "redirect:/employee/showList";
+		
+	}
+
+
 	
 	
 

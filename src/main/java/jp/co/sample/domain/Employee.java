@@ -13,7 +13,7 @@ public class Employee {
 	private String address;
 	private String telephone;
 	private Integer salary;
-	private String characteristic;
+	private String characteristics;
 	private Integer dependentsCount;
 	
 	
@@ -21,7 +21,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", hireDate=" + hireDate
 				+ ", mailAddress=" + mailAddress + ", zipCode=" + zipCode + ", address=" + address + ", telephone="
-				+ telephone + ", salary=" + salary + ", characteristic=" + characteristic + ", dependentsCount="
+				+ telephone + ", salary=" + salary + ", characteristics=" + characteristics + ", dependentsCount="
 				+ dependentsCount + "]";
 	}
 
@@ -126,13 +126,13 @@ public class Employee {
 	}
 
 
-	public String getCharacteristic() {
-		return characteristic;
+	public String getCharacteristics() {
+		return characteristics;
 	}
 
 
-	public void setCharacteristic(String characteristic) {
-		this.characteristic = characteristic;
+	public void setCharacteristics(String characteristics) {
+		this.characteristics = characteristics;
 	}
 
 
@@ -144,6 +144,7 @@ public class Employee {
 	public void setDependentsCount(Integer dependentsCount) {
 		this.dependentsCount = dependentsCount;
 	}
+
 	
 	
 	
