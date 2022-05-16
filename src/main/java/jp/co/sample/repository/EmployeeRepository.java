@@ -23,23 +23,23 @@ public class EmployeeRepository {
 	
 	
 	public List<Employee> findAll(){
-		String sql="select id,name,image,gender,hireDate,mailAddress,zipCode,address,telephone,salary,characteristics,departmentCount"
-				+ " from employees order by direDate desc";
+		String sql="select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
+				+ " from employees order by hire_date desc";
 		List <Employee>employeeList=template.query(sql,EMPLOYEE_ROW_MAPPER );
 		
 		return employeeList;
 	}
 	public Employee load(Integer id) {
-		String sql="select id,name,image,gender,hireDate,mailAddress,zipCode,address,telephone,salary,characteristics,departmentCount"
-				+ "from employees where id=:id";
+		String sql="select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
+				+ " from employees where id=:id";
 		SqlParameterSource param=new MapSqlParameterSource().addValue("id", id);
 		Employee employee=new Employee();
 		return employee;
 	}
 	public void update(Employee employee) {
 		SqlParameterSource param=new BeanPropertySqlParameterSource(employee);
-		String updatesql="update employees set name:name,image:image,gender:gender,hireDate:hireDate,mailAddress:mailAddress,zipCode:zipCode,"
-				+ " address:address,telephone:telephone,salary:salary,characteristics:characteristics,departmentCount:departmentCount where id=:id";
+		String updatesql="update employees set name:name,image:image,gender:gender,hire_date:hireDate,mail_address:mailAddress,zip_code:zipCode,"
+				+ " address:address,telephone:telephone,salary:salary,characteristics:characteristics,dependents_count:dependentsCount where id=:id";
 		template.update(updatesql, param);
 		
 	}

@@ -1,6 +1,6 @@
 package jp.co.sample.form;
 
-public class InsertAdministratorForm {
+public class AdministratorForm {
 	private String name;
 	private String mailAddress;
 	private String password;
